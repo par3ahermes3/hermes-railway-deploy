@@ -14,6 +14,9 @@ if [ -n "$TELEGRAM_BOT_TOKEN" ]; then
     if [ -n "$TELEGRAM_ALLOWED_USERS" ]; then
         echo "TELEGRAM_ALLOWED_USERS=$TELEGRAM_ALLOWED_USERS" >> ~/.hermes/.env
     fi
+    
+    # Explicitly enable Telegram platform in config.yaml
+    hermes config set telegram.enabled true
 fi
 
 # Set default model if provided
