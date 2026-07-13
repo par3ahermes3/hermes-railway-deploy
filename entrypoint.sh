@@ -2,13 +2,17 @@
 set -e
 
 # Setup Hermes Gateway via CLI non-interactively if env vars are present
+mkdir -p ~/.hermes
+touch ~/.hermes/.env
+
 if [ -n "$TELEGRAM_BOT_TOKEN" ]; then
     echo "Configuring Telegram Gateway..."
-    hermes config set gateway.platforms.telegram.enabled true
-    hermes config set gateway.platforms.telegram.bot_token "$TELEGRAM_BOT_TOKEN"
+    
+    # Token and allowed users go into .env
+    echo "TELEGRAM_BOT_TOKEN=$TELEGRAM_BOT_TOKEN" >> ~/.hermes/.env
     
     if [ -n "$TELEGRAM_ALLOWED_USERS" ]; then
-        hermes config set gateway.platforms.telegram.allowed_users "$TELEGRAM_ALLOWED_USERS"
+        echo "TELEGRAM_ALLOWED_USERS=$TELEGRAM_ALLOWED_USERS" >> ~/.hermes/.env
     fi
 fi
 
@@ -20,9 +24,11 @@ fi
 
 # Set providers if keys exist
 if [ -n "$OPENROUTER_API_KEY" ]; then
+    echo "OPENROUTER_API_KEY=$OPENROUTER_API_KEY" >> ~/.hermes/.env
     hermes config set model.provider openrouter
 fi
 if [ -n "$ANTHROPIC_API_KEY" ]; then
+    echo "ANTHROPIC_API_KEY=$ANTHROPIC_API_KEY" >> ~/.hermes/.env
     hermes config set model.provider anthropic
 fi
 
