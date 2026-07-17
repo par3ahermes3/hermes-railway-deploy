@@ -20,5 +20,4 @@ fi
 [ -n "$MODEL_DEFAULT" ] && hermes config set model.default "$MODEL_DEFAULT"
 [ -n "$DEFAULT_MODEL" ] && hermes config set model.default "$DEFAULT_MODEL"
 
-echo "Starting Hermes Gateway..."
-exec hermes gateway run --no-supervise --force 2>&1
+echo "Hermes config complete. s6 will start gateway."
