@@ -62,4 +62,4 @@ if [ -n "$MODEL_DEFAULT" ]; then
 fi
 
 echo "Starting Hermes Gateway..."
-exec hermes gateway run
+exec hermes gateway run --no-supervise --force 2>&1
