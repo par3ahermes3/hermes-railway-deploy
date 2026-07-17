@@ -39,5 +39,27 @@ if [ -n "$ANTHROPIC_API_KEY" ]; then
     hermes config set model.provider anthropic
 fi
 
+
+# Set custom model provider if provided
+if [ -n "$MODEL_PROVIDER" ]; then
+    echo "Setting model provider to $MODEL_PROVIDER"
+    hermes config set model.provider "$MODEL_PROVIDER"
+fi
+
+if [ -n "$MODEL_BASE_URL" ]; then
+    echo "Setting model base URL to $MODEL_BASE_URL"
+    hermes config set model.base_url "$MODEL_BASE_URL"
+fi
+
+if [ -n "$MODEL_API_KEY" ]; then
+    echo "Setting model API key"
+    hermes config set model.api_key "$MODEL_API_KEY"
+fi
+
+if [ -n "$MODEL_DEFAULT" ]; then
+    echo "Setting default model to $MODEL_DEFAULT"
+    hermes config set model.default "$MODEL_DEFAULT"
+fi
+
 echo "Starting Hermes Gateway..."
 exec hermes gateway run
